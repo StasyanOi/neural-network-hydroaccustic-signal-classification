@@ -1,4 +1,4 @@
-package com;
+package com.stas;
 
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
@@ -15,7 +15,6 @@ import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.SplitTestAndTrain;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
-import org.nd4j.linalg.io.ClassPathResource;
 import org.nd4j.linalg.learning.config.Nesterovs;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
@@ -26,6 +25,7 @@ import java.util.List;
 public class Main {
 
     private static MultiLayerConfiguration getNeuralNetConfiguration() {
+
         return new NeuralNetConfiguration.Builder()
                 .seed(12).optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
                 .biasInit(0.5).updater(new Nesterovs(0.00009, 0.0005))
@@ -40,7 +40,7 @@ public class Main {
 
     private static DataSet getDataSet(String fileName) throws IOException, InterruptedException {
         RecordReader recordReader = new CSVRecordReader(0, ',');
-        recordReader.initialize(new FileSplit(new File(new ClassPathResource("data.txt").getURI())));
+        recordReader.initialize(new FileSplit(new File(fileName)));
         DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, 1000, 100, 1);
         DataSet dataSet = dataSetIterator.next();
         dataSet.shuffle(42);
@@ -49,26 +49,32 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         MultiLayerConfiguration configuration = getNeuralNetConfiguration();
 
 
         System.out.println("Loading data set");
         try {
-            DataSet dataSet = getDataSet("data.txt");
+            DataSet dataSet = getDataSet("dataR.txt");
+            dataSet.normalize();
             SplitTestAndTrain splitTestAndTrain = dataSet.splitTestAndTrain(0.65);
 
             DataSet testDataSet = splitTestAndTrain.getTest();
             dataSet = splitTestAndTrain.getTrain();
-            List<DataSet> dataSets = dataSet.batchBy(50);
+            List<DataSet> dataSets = dataSet.batchBy(10);
             MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(configuration);
             multiLayerNetwork.init();
 
-            for (DataSet ds : dataSets) {
-                for (int i = 0; i < 120; ++i) {
-                    multiLayerNetwork.fit(ds);
-                    System.out.println("training...");
-                }
-            }
+          for (int i = 0; i < 10; i++) {
+              for (DataSet ds : dataSets) {
+                  for (int j = 0; j < 120; ++j) {
+                      multiLayerNetwork.fit(ds);
+                      System.out.printf("train\n");
+                  }
+              }
+          }
+
+
 
             Evaluation evaluation = new Evaluation(2);
             evaluation.eval(testDataSet.getLabels(), multiLayerNetwork.output(testDataSet.getFeatures()));
