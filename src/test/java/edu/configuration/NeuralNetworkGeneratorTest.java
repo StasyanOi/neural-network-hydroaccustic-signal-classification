@@ -2,7 +2,6 @@ package edu.configuration;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.dataset.DataSet;
@@ -15,7 +14,7 @@ import java.util.List;
 
 import static edu.configuration.DataSetLoader.getDataSet;
 import static edu.configuration.NeuralNetworkGenerator.getNeuralNetConfiguration;
-import static java.lang.String.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class NeuralNetworkGeneratorTest {
 
@@ -46,9 +45,9 @@ class NeuralNetworkGeneratorTest {
         Evaluation evaluation = new Evaluation(2);
         evaluation.eval(testDataSet.getLabels(), multiLayerNetwork.output(testDataSet.getFeatures()));
 
-        Assertions.assertTrue(evaluation.accuracy() > 0.95d, evaluation.accuracy() + " is to small");
-        Assertions.assertTrue(evaluation.precision() > 0.91d, evaluation.precision() + " is to small");
-        Assertions.assertTrue(evaluation.recall() > 0.95d, evaluation.recall() + " is to small");
-        Assertions.assertTrue(evaluation.f1() > 0.95d, evaluation.f1() + " is to small");
+        assertTrue(evaluation.accuracy() > 0.95d, evaluation.accuracy() + " is to small");
+        assertTrue(evaluation.precision() > 0.91d, evaluation.precision() + " is to small");
+        assertTrue(evaluation.recall() > 0.95d, evaluation.recall() + " is to small");
+        assertTrue(evaluation.f1() > 0.95d, evaluation.f1() + " is to small");
     }
 }
