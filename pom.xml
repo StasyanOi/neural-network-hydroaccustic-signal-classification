@@ -16,7 +16,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.stas.Main</mainClass>
+                            <mainClass>edu.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -47,6 +47,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${poi.version}</version>
@@ -71,8 +77,8 @@
     <properties>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <deeplearning4j-core.version>1.0.0-beta3</deeplearning4j-core.version>
-        <poi.version>3.17</poi.version>
-        <commons-math.version>2.1</commons-math.version>
+        <poi.version>5.2.2</poi.version>
+        <commons-math.version>2.2</commons-math.version>
         <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
     </properties>
 
