@@ -7,6 +7,15 @@
     <groupId>NeuralNetForHydroaccusticSignalClassification</groupId>
     <artifactId>NeuralNetForHydroaccusticSignalClassification</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <deeplearning4j-core.version>1.0.0-M2.1</deeplearning4j-core.version>
+        <poi.version>5.2.2</poi.version>
+        <commons-math.version>2.2</commons-math.version>
+        <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -44,7 +53,6 @@
         </plugins>
     </build>
 
-
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -73,14 +81,4 @@
             <version>${deeplearning4j-core.version}</version>
         </dependency>
     </dependencies>
-
-    <properties>
-        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <deeplearning4j-core.version>1.0.0-M2.1</deeplearning4j-core.version>
-        <poi.version>5.2.2</poi.version>
-        <commons-math.version>2.2</commons-math.version>
-        <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
-    </properties>
-
-
 </project>
