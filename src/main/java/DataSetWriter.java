@@ -1,7 +1,6 @@
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.ops.transforms.Transforms;
-import org.nd4j.linalg.util.FeatureUtil;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,8 +16,7 @@ public class DataSetWriter {
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) throws IOException {
 
-        INDArray indArray = Nd4j.linspace(0, 6.28, 100);
-      //  Files.delete(FileSystems.getDefault().getPath("src\\main\\resources\\dataR.txt"));
+        INDArray indArray = Nd4j.linspace(0, 7, 100);
         Path path = FileSystems.getDefault().getPath("src\\main\\resources\\dataR.txt");
         Path file1 = Files.createFile(path);
         File file = file1.toFile();
@@ -32,8 +30,8 @@ public class DataSetWriter {
             arrsin = arrsin.mul(multiplier2);
            // FeatureUtil.scaleMinMax(0, 1.0, arrsin.transpose());
             double[] doubles = arrsin.toDoubleVector();
-            for (int k = 0; k < doubles.length; ++k) {
-                bufferedWriter.write(String.format(Locale.CANADA, "%.4f", doubles[k]) + ",");
+            for (double aDouble : doubles) {
+                bufferedWriter.write(String.format(Locale.CANADA, "%.4f", aDouble) + ",");
             }
             bufferedWriter.write("1\n");
         }
@@ -49,8 +47,8 @@ public class DataSetWriter {
            // FeatureUtil.scaleMinMax(0, 1.0, arrcos.transpose());
             arrcos.transpose();
             double[] doubles = arrcos.toDoubleVector();
-            for (int k = 0; k < doubles.length; ++k) {
-                bufferedWriter.write(String.format(Locale.CANADA, "%.4f", doubles[k]) + ",");
+            for (double aDouble : doubles) {
+                bufferedWriter.write(String.format(Locale.CANADA, "%.4f", aDouble) + ",");
             }
             bufferedWriter.write("0\n");
         }
