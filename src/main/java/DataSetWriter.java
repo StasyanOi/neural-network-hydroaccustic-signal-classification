@@ -16,7 +16,7 @@ public class DataSetWriter {
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) throws IOException {
 
-        INDArray indArray = Nd4j.linspace(0, 6.28, 100);
+        INDArray indArray = Nd4j.linspace(0, 7, 100);
         Path path = FileSystems.getDefault().getPath("src\\main\\resources\\dataR.txt");
         Path file1 = Files.createFile(path);
         File file = file1.toFile();
